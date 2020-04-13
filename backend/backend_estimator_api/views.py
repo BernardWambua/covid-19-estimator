@@ -10,7 +10,7 @@ class Estimator(APIView):
 
     def post(self, request):
         """
-        Return a list of all users.
+        Return data as well as impact and severe impact estimations.
         """
         data = request.data
         res = estimator(data)
