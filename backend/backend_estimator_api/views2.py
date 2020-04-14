@@ -1,11 +1,11 @@
 import datetime
-from rest_framework import status, generics
+from rest_framework import status
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from backend_estimator_api.serializers import LogsSerializer
-from backend_estimator_api.models import Logs
+from backend_estimator_api.models import Logs as LogsModel
 from dicttoxml import dicttoxml
 from backend_estimator_api.estimator import estimator
 
@@ -50,7 +50,7 @@ class Estimator(APIView):
             return Response(res, status=status.HTTP_200_OK)
 
 
-class Logs(generics.ListCreateAPIView):
+class Logs(APIView):
     """ Logs Viewset"""
 
     def _save_log(self, log):
@@ -64,7 +64,7 @@ class Logs(generics.ListCreateAPIView):
             'endpoint': self.request.META['PATH_INFO'],
             'method': self.request.META['REQUEST_METHOD'],
         }
-        logs = Logs.objects.all()
+        logs = LogsModel.objects.all()
         serializer = LogsSerializer(logs, many=True)
         end = datetime.datetime.now()
         log['status'] = '200'
