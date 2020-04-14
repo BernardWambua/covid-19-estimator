@@ -1,5 +1,5 @@
 import datetime
-from rest_framework import status, generics
+from rest_framework import status
 from rest_framework.mixins import ListModelMixin
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.views import APIView
@@ -50,7 +50,7 @@ class Estimator(APIView):
             return Response(res, status=status.HTTP_200_OK)
 
 
-class Logs(generics.ListCreateAPIView):
+class Logs(APIView):
     """ Logs Viewset"""
 
     def _save_log(self, log):
